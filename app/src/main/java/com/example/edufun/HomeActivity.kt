@@ -1,37 +1,52 @@
 package com.example.edufun
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.edufun.adapter.CategoryAdapter
+import com.example.edufun.database.DatabaseHelper
 import com.example.edufun.databinding.ActivityHomeBinding
 import com.example.edufun.model.Category
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListener {
 
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
-        val categories = listOf(
-            Category("Matematika", "Belajar Matematika sangat menyenangkan!", R.drawable.math),
-            Category("IPA", "Belajar IPA sangat menyenangkan!", R.drawable.science),
-            Category("Seni Budaya", "Belajar Seni Budaya sangat menyenangkan!", R.drawable.seni_budaya)
-        )
+        // Inisialisasi DatabaseHelper
+        dbHelper = DatabaseHelper(this)
 
-        val adapter = CategoryAdapter(categories)
+        // Menambahkan data pelajaran ke database
+        addSampleData()
+
+        // Mengambil semua mata pelajaran dari database
+        val categories = dbHelper.getAllCategory()
+
+        // Mengatur adapter
+        val adapter = CategoryAdapter(categories, this)
         binding.rvCategory.adapter = adapter
         binding.rvCategory.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun addSampleData() {
+        // Menambahkan data pelajaran jika belum ada
+        dbHelper.addCategory("Matematika", "Belajar Matematika sangat menyenangkan!", R.drawable.math)
+        dbHelper.addCategory("IPA", "Belajar IPA sangat menyenangkan!", R.drawable.science)
+        dbHelper.addCategory("Seni Budaya", "Belajar Seni Budaya sangat menyenangkan!", R.drawable.seni_budaya)
+    }
+
+    // Implementasi metode dari listener
+    override fun onCategoryClick(category: Category) {
+        // Tindakan yang diambil saat kategori diklik
+        Toast.makeText(this, "Kategori: ${category.name}", Toast.LENGTH_SHORT).show()
     }
 }
