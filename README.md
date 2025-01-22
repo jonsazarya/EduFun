@@ -14,8 +14,8 @@ EduFun adalah aplikasi pembelajaran interaktif berbasis Android yang dirancang u
   
 - **Bahasa Pemrograman**: Kotlin  
 - **Framework**: Android SDK  
-- **Database**: Firebase (atau SQLite, jika digunakan)  
-- **UI**: Android Jetpack, RecyclerView, ConstraintLayout  
+- **Database**: SQLite 
+- **UI**: Android Jetpack, RecyclerView, ConstraintLayout, LinearLayout
   
 ## Prerequisites  
   
@@ -33,9 +33,7 @@ git clone https://github.com/jonsazarya/EduFun.git
   
 2. Buka proyek di Android Studio.  
   
-3. Pastikan Anda telah mengonfigurasi Firebase (jika digunakan) dan menambahkan file `google-services.json` ke dalam proyek.  
-  
-4. Jalankan aplikasi di emulator atau perangkat Android Anda.  
+3. Jalankan aplikasi di emulator atau perangkat Android Anda.  
   
 ## Kontribusi  
   
