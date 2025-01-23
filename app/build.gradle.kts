@@ -7,6 +7,10 @@ android {
     namespace = "com.example.edufun"
     compileSdk = 35
 
+    viewBinding {
+        enable = true
+    }
+
     buildFeatures {
         viewBinding = true
     }

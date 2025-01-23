@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.edufun.model.Category
 
-class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class CategoryDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private const val DATABASE_NAME = "mataPelajaran.db"
@@ -65,21 +65,5 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         db.close()
         return mataPelajaranList
-    }
-
-    fun updateCategory(id: Int, nama: String, deskripsi: String) {
-        val db = this.writableDatabase
-        val values = ContentValues().apply {
-            put(COLUMN_NAMA, nama)
-            put(COLUMN_DESKRIPSI, deskripsi)
-        }
-        db.update(TABLE_NAME, values, "$COLUMN_ID = ?", arrayOf(id.toString()))
-        db.close()
-    }
-
-    fun deleteCategory(id: Int) {
-        val db = this.writableDatabase
-        db.delete(TABLE_NAME, "$COLUMN_ID = ?", arrayOf(id.toString()))
-        db.close()
     }
 }
