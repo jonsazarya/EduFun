@@ -9,28 +9,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.edufun.R
+import com.example.edufun.model.Category
 import com.example.edufun.model.Chapter
 
-class ChapterAdapter(private val chapters: List<Chapter>, private val context: Context) : RecyclerView.Adapter<ChapterAdapter.ChapterViewHolder>() {
+class ChapterAdapter(private val chapters: List<Chapter>, private val listener: OnChapterClickListener) : RecyclerView.Adapter<ChapterAdapter.ChapterViewHolder>() {
+
+    interface OnChapterClickListener {
+        fun onChapterClick(chapter: Chapter)
+    }
 
     inner class ChapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val titleTextView: TextView = itemView.findViewById(R.id.tv_title)
-        val descriptionTextView: TextView = itemView.findViewById(R.id.tv_desc)
+        val chapterName: TextView = itemView.findViewById(R.id.tv_chapter_title)
+        val chapterDescription: TextView = itemView.findViewById(R.id.tv_chapter_description)
 
-        init {
-            itemView.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val chapter = chapters[position]
-                    openYouTubeVideo(chapter.videoUrl) // Membuka video YouTube
-                }
-            }
-        }
-
-        private fun openYouTubeVideo(videoUrl: String) {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
-            context.startActivity(intent)
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChapterViewHolder {
@@ -40,8 +31,12 @@ class ChapterAdapter(private val chapters: List<Chapter>, private val context: C
 
     override fun onBindViewHolder(holder: ChapterViewHolder, position: Int) {
         val chapter = chapters[position]
-        holder.titleTextView.text = chapter.title
-        holder.descriptionTextView.text = chapter.description
+        holder.chapterName.text = chapter.title
+        holder.chapterDescription.text = chapter.description
+
+        holder.itemView.setOnClickListener {
+            listener.onChapterClick(chapter)
+        }
     }
 
     override fun getItemCount(): Int {

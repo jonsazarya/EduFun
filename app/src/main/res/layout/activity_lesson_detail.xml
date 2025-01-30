@@ -56,7 +56,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         tools:listitem="@layout/list_item_chapter"
-        tools:itemCount="5"
         app:layout_constraintTop_toBottomOf="@id/tv_desc"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

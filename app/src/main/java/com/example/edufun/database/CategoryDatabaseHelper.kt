@@ -11,59 +11,81 @@ class CategoryDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATAB
 
     companion object {
         private const val DATABASE_NAME = "mataPelajaran.db"
-        private const val DATABASE_VERSION = 1
-        private const val TABLE_NAME = "mata_pelajaran"
+        private const val DATABASE_VERSION = 2
+        private const val TABLE_CATEGORIES = "categories"
         private const val COLUMN_ID = "id"
-        private const val COLUMN_NAMA = "nama"
-        private const val COLUMN_DESKRIPSI = "deskripsi"
-        private const val COLUMN_IMAGE = "image"
+        private const val COLUMN_NAME = "name"
+        private const val COLUMN_DESCRIPTION = "description"
+        private const val COLUMN_IMAGE_RES_ID = "imageResId"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        val createTable = ("CREATE TABLE $TABLE_NAME (" +
-                "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "$COLUMN_NAMA TEXT, " +
-                "$COLUMN_DESKRIPSI TEXT, " +
-                "$COLUMN_IMAGE INTEGER" +
-                ")")
-        db.execSQL(createTable)
+        val createTableQuery = """
+            CREATE TABLE $TABLE_CATEGORIES (
+                $COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COLUMN_NAME TEXT NOT NULL,
+                $COLUMN_DESCRIPTION TEXT NOT NULL,
+                $COLUMN_IMAGE_RES_ID INTEGER NOT NULL
+            )
+        """.trimIndent()
+        db.execSQL(createTableQuery)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_CATEGORIES")
         onCreate(db)
     }
 
-    fun addCategory(nama: String, deskripsi: String, imageResId: Int) {
+    fun addCategory(name: String, description: String, imageResId: Int): Int {
         val db = this.writableDatabase
         val values = ContentValues().apply {
-            put(COLUMN_NAMA, nama)
-            put(COLUMN_DESKRIPSI, deskripsi)
-            put(COLUMN_IMAGE, imageResId)
+            put(COLUMN_NAME, name)
+            put(COLUMN_DESCRIPTION, description)
+            put(COLUMN_IMAGE_RES_ID, imageResId)
         }
-        db.insert(TABLE_NAME, null, values)
+        val categoryId = db.insert(TABLE_CATEGORIES, null, values).toInt()
         db.close()
+        return categoryId
     }
 
-    fun getAllCategory(): List<Category> {
-        val mataPelajaranList = mutableListOf<Category>()
+    fun getAllCategories(): List<Category> {
+        val categories = mutableListOf<Category>()
         val db = this.readableDatabase
-        val cursor: Cursor? = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+        val selectQuery = "SELECT * FROM $TABLE_CATEGORIES"
+        val cursor: Cursor? = db.rawQuery(selectQuery, null)
 
-        cursor.use { cursor ->
-            if (cursor != null && cursor.moveToFirst()) {
-                do {
-                    val mataPelajaran = Category(
-                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAMA)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESKRIPSI)),
-                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_IMAGE))
-                    )
-                    mataPelajaranList.add(mataPelajaran)
-                } while (cursor.moveToNext())
+        cursor?.use {
+            while (it.moveToNext()) {
+                val id = it.getInt(it.getColumnIndexOrThrow(COLUMN_ID))
+                val name = it.getString(it.getColumnIndexOrThrow(COLUMN_NAME))
+                val description = it.getString(it.getColumnIndexOrThrow(COLUMN_DESCRIPTION))
+                val imageResId = it.getInt(it.getColumnIndexOrThrow(COLUMN_IMAGE_RES_ID))
+                categories.add(Category(id, name, description, imageResId))
             }
         }
+        cursor?.close()
         db.close()
-        return mataPelajaranList
+        return categories
+    }
+
+    fun getCategoryById(categoryId: Int): Category? {
+        val db = this.readableDatabase
+        val selectQuery = "SELECT * FROM $TABLE_CATEGORIES WHERE $COLUMN_ID = $categoryId"
+        val cursor: Cursor? = db.rawQuery(selectQuery, null)
+
+        val category = cursor?.use {
+            if (it.moveToFirst()) {
+                val id = it.getInt(it.getColumnIndexOrThrow(COLUMN_ID))
+                val name = it.getString(it.getColumnIndexOrThrow(COLUMN_NAME))
+                val description = it.getString(it.getColumnIndexOrThrow(COLUMN_DESCRIPTION))
+                val imageResId = it.getInt(it.getColumnIndexOrThrow(COLUMN_IMAGE_RES_ID))
+                Category(id, name, description, imageResId)
+            } else {
+                null
+            }
+        }
+        cursor?.close()
+        db.close()
+        return category
     }
 }
