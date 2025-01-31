@@ -2,5 +2,22 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="hijau">#007A6B</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="pink_500">#D81B60</color>
+    <color name="pink_200">#FF8FAF</color>
+
+    <color name="light">#9AD6F5</color>
+    <color name="light_hover">#7BC2EB</color>
+    <color name="light_active">#5CAEE1</color>
+    <color name="normal">#046CBC</color>
+    <color name="normal_hover">#0258A8</color>
+    <color name="normal_active">#004494</color>
+    <color name="dark">#004494</color>
+    <color name="dark_hover">#003380</color>
+    <color name="dark_active">#00226C</color>
+    <color name="darker">#00226C</color>
 </resources>

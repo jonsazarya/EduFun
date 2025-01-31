@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_active"
     tools:context=".LessonDetailActivity">
 
     <androidx.cardview.widget.CardView
@@ -31,6 +32,7 @@
         android:layout_height="wrap_content"
         android:text="MATEMATIKA"
         android:textSize="32sp"
+        android:textColor="@color/darker"
         android:textStyle="bold"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
@@ -45,6 +47,7 @@
         android:text="DESKRIPSI"
         android:textSize="16sp"
         android:textStyle="italic"
+        android:textColor="@color/darker"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"

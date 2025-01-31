@@ -24,7 +24,7 @@ class QuizAdapter(private val quizzes: List<Quiz>, private val onAnswerSelected:
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuizViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_quiz, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_quiz, parent, false)
         return QuizViewHolder(view)
     }
 

@@ -11,7 +11,7 @@ class QuizDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
 
     companion object {
         private const val DATABASE_NAME = "quiz.db"
-        private const val DATABASE_VERSION = 2
+        private const val DATABASE_VERSION = 1
         private const val TABLE_NAME = "quizzes"
         private const val COLUMN_ID = "id"
         private const val COLUMN_CATEGORY_ID = "categoryId"

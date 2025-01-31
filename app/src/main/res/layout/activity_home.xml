@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_active"
     tools:context=".HomeActivity">
 
     <LinearLayout
@@ -25,7 +26,7 @@
                 android:text="@string/hi_user_home"
                 android:textSize="32sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/darker"
                 android:layout_gravity="center_vertical"/>
 
             <ImageView
@@ -42,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/desc_home"
+            android:textColor="@color/dark_active"
             android:textSize="15sp"/>
 
         <LinearLayout
@@ -50,14 +52,16 @@
             android:orientation="horizontal"
             android:layout_marginVertical="8dp">
 
-            <Button
+            <com.example.edufun.button.MyButtonHome
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+                android:enabled="false"
                 android:text="Top" />
 
-            <Button
+            <com.example.edufun.button.MyButtonHome
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+                android:enabled="false"
                 android:text="Sumber Materi"
                 android:layout_marginStart="16dp"/>
 
@@ -69,7 +73,7 @@
             android:text="Category"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textColor="@color/darker"/>
 
         <ScrollView
             android:layout_width="match_parent"
