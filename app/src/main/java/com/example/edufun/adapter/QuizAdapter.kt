@@ -1,0 +1,57 @@
+package com.example.edufun.adapter
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.edufun.R
+import com.example.edufun.model.Quiz
+
+class QuizAdapter(private val quizzes: List<Quiz>, private val onAnswerSelected: (Quiz, String) -> Unit) : RecyclerView.Adapter<QuizAdapter.QuizViewHolder>() {
+
+    class QuizViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvQuestion: TextView = itemView.findViewById(R.id.tvQuestion)
+        val rbOption1: RadioButton = itemView.findViewById(R.id.rbOption1)
+        val rbOption2: RadioButton = itemView.findViewById(R.id.rbOption2)
+        val rbOption3: RadioButton = itemView.findViewById(R.id.rbOption3)
+        val rbOption4: RadioButton = itemView.findViewById(R.id.rbOption4)
+        val radioGroup: RadioGroup = itemView.findViewById(R.id.radioGroup)
+        val btnSubmit: Button = itemView.findViewById(R.id.btnSubmit)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuizViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_quiz, parent, false)
+        return QuizViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: QuizViewHolder, position: Int) {
+        val quiz = quizzes[position]
+        holder.tvQuestion.text = quiz.question
+        holder.rbOption1.text = quiz.option1
+        holder.rbOption2.text = quiz.option2
+        holder.rbOption3.text = quiz.option3
+        holder.rbOption4.text = quiz.option4
+
+        holder.radioGroup.clearCheck()
+
+        holder.btnSubmit.setOnClickListener {
+            val selectedId = holder.radioGroup.checkedRadioButtonId
+            if (selectedId != -1) {
+                val selectedOption = when (selectedId) {
+                    holder.rbOption1.id -> quiz.option1
+                    holder.rbOption2.id -> quiz.option2
+                    holder.rbOption3.id -> quiz.option3
+                    holder.rbOption4.id -> quiz.option4
+                    else -> ""
+                }
+                onAnswerSelected(quiz, selectedOption)
+            }
+        }
+    }
+
+    override fun getItemCount(): Int = quizzes.size
+}
