@@ -27,8 +27,6 @@ Sebelum menjalankan aplikasi ini, pastikan Anda memiliki:
 ## Cara Menjalankan Aplikasi  
   
 1. Clone repositori ini ke komputer Anda:  
-bash
-
 git clone https://github.com/jonsazarya/EduFun.git
   
 2. Buka proyek di Android Studio.  
