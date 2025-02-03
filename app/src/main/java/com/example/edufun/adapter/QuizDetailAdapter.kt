@@ -9,9 +9,9 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.edufun.R
-import com.example.edufun.model.Quiz
+import com.example.edufun.model.QuizDetail
 
-class QuizAdapter(private val quizzes: List<Quiz>, private val onAnswerSelected: (Quiz, String) -> Unit) : RecyclerView.Adapter<QuizAdapter.QuizViewHolder>() {
+class QuizDetailAdapter(private val quizDetails: List<QuizDetail>, private val onAnswerSelected: (QuizDetail, String) -> Unit) : RecyclerView.Adapter<QuizDetailAdapter.QuizViewHolder>() {
 
     class QuizViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvQuestion: TextView = itemView.findViewById(R.id.tvQuestion)
@@ -24,12 +24,12 @@ class QuizAdapter(private val quizzes: List<Quiz>, private val onAnswerSelected:
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuizViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_quiz, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_quiz_detail, parent, false)
         return QuizViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: QuizViewHolder, position: Int) {
-        val quiz = quizzes[position]
+        val quiz = quizDetails[position]
         holder.tvQuestion.text = quiz.question
         holder.rbOption1.text = quiz.option1
         holder.rbOption2.text = quiz.option2
@@ -53,5 +53,5 @@ class QuizAdapter(private val quizzes: List<Quiz>, private val onAnswerSelected:
         }
     }
 
-    override fun getItemCount(): Int = quizzes.size
+    override fun getItemCount(): Int = quizDetails.size
 }

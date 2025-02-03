@@ -12,74 +12,59 @@ class QuizDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
     companion object {
         private const val DATABASE_NAME = "quiz.db"
         private const val DATABASE_VERSION = 1
-        private const val TABLE_NAME = "quizzes"
-        private const val COLUMN_ID = "id"
-        private const val COLUMN_CATEGORY_ID = "categoryId"
-        private const val COLUMN_QUESTION = "question"
-        private const val COLUMN_OPTION1 = "option1"
-        private const val COLUMN_OPTION2 = "option2"
-        private const val COLUMN_OPTION3 = "option3"
-        private const val COLUMN_OPTION4 = "option4"
-        private const val COLUMN_ANSWER = "answer"
+        private const val TABLE_QUIZZES = "quizzes"
+        private const val COLUMN_ID = "_id"
+        private const val COLUMN_TITLE = "title"
+        private const val COLUMN_CONTENT = "content"
+        private const val COLUMN_CATEGORY_ID = "category_id"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        val createTable = ("CREATE TABLE $TABLE_NAME (" +
+        val createTable = ("CREATE TABLE $TABLE_QUIZZES (" +
                 "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "$COLUMN_CATEGORY_ID INTEGER, " +
-                "$COLUMN_QUESTION TEXT, " +
-                "$COLUMN_OPTION1 TEXT, " +
-                "$COLUMN_OPTION2 TEXT, " +
-                "$COLUMN_OPTION3 TEXT, " +
-                "$COLUMN_OPTION4 TEXT, " +
-                "$COLUMN_ANSWER TEXT" +
-                ")")
+                "$COLUMN_TITLE TEXT, " +
+                "$COLUMN_CONTENT TEXT, " +
+                "$COLUMN_CATEGORY_ID INTEGER)")
         db.execSQL(createTable)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_QUIZZES")
         onCreate(db)
     }
 
-    fun addQuiz(categoryId: Int, question: String, option1: String, option2: String, option3: String, option4: String, answer: String) {
+    fun addQuiz(title: String, content: String, categoryId: Int): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
+            put(COLUMN_TITLE, title)
+            put(COLUMN_CONTENT, content)
             put(COLUMN_CATEGORY_ID, categoryId)
-            put(COLUMN_QUESTION, question)
-            put(COLUMN_OPTION1, option1)
-            put(COLUMN_OPTION2, option2)
-            put(COLUMN_OPTION3, option3)
-            put(COLUMN_OPTION4, option4)
-            put(COLUMN_ANSWER, answer)
         }
-        db.insert(TABLE_NAME, null, values)
-        db.close()
+        return db.insert(TABLE_QUIZZES, null, values)
     }
 
-    fun getQuizzesByCategoryId(categoryId: Int): List<Quiz> {
-        val quizList = mutableListOf<Quiz>()
+    fun getAllQuizzesByCategoryId(categoryId: Int): List<Quiz> {
+        val quizzes = mutableListOf<Quiz>()
         val db = this.readableDatabase
-        val cursor: Cursor? = db.rawQuery("SELECT * FROM $TABLE_NAME WHERE $COLUMN_CATEGORY_ID = $categoryId", null)
-
-        cursor.use { cursor ->
-            if (cursor != null && cursor.moveToFirst()) {
-                do {
-                    val quiz = Quiz(
-                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
-                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CATEGORY_ID)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_QUESTION)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_OPTION1)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_OPTION2)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_OPTION3)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_OPTION4)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ANSWER))
-                    )
-                    quizList.add(quiz)
-                } while (cursor.moveToNext())
+        val selection = "$COLUMN_CATEGORY_ID = ?"
+        val selectionArgs = arrayOf(categoryId.toString())
+        val cursor: Cursor? = db.query(
+            TABLE_QUIZZES,
+            null,
+            selection,
+            selectionArgs,
+            null,
+            null,
+            null
+        )
+        cursor?.use {
+            while (it.moveToNext()) {
+                val id = it.getInt(it.getColumnIndexOrThrow(COLUMN_ID))
+                val title = it.getString(it.getColumnIndexOrThrow(COLUMN_TITLE))
+                val content = it.getString(it.getColumnIndexOrThrow(COLUMN_CONTENT))
+                quizzes.add(Quiz(id, title, content, categoryId))
             }
         }
-        db.close()
-        return quizList
+        return quizzes
     }
 }

@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".QuizActivity"
+            android:name=".quiz.QuizActivity"
             android:exported="false" />
         <activity
             android:name=".AddChapterActivity"
@@ -31,9 +31,6 @@
             android:name=".LessonDetailActivity"
             android:exported="false"
             android:theme="@style/Theme.EduFun" />
-        <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

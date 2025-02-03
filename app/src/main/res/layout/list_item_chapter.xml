@@ -23,7 +23,7 @@
             android:id="@+id/tv_chapter_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title Chapter"
+            android:text="Chapter Title"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/darker" />

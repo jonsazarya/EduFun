@@ -1,6 +1,6 @@
 package com.example.edufun.model
 
-data class Quiz(
+data class QuizDetail(
     val id: Int,
     val categoryId: Int,
     val question: String,
