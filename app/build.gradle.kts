@@ -13,6 +13,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
     
     defaultConfig {
@@ -62,4 +63,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.viewpager2)
+
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson.v2110)
+    implementation(libs.logging.interceptor)
+    implementation(libs.glide)
 }

@@ -11,9 +11,10 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.edufun.view.MainActivity
 import com.example.edufun.R
 import com.example.edufun.databinding.ActivityWelcomeBinding
+import com.example.edufun.view.login.LoginActivity
+import com.example.edufun.view.signup.SignupActivity
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeBinding
@@ -47,8 +48,11 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        binding.btnLogin.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+        binding.loginButton.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+        binding.signupButton.setOnClickListener {
+            startActivity(Intent(this, SignupActivity::class.java))
         }
     }
 
@@ -61,10 +65,11 @@ class WelcomeActivity : AppCompatActivity() {
 
         val title = ObjectAnimator.ofFloat(binding.tvHalo, View.ALPHA, 1f).setDuration(100)
         val desc = ObjectAnimator.ofFloat(binding.tvDesc, View.ALPHA, 1f).setDuration(100)
-        val button = ObjectAnimator.ofFloat(binding.btnLogin, View.ALPHA, 1f).setDuration(100)
+        val buttonLogin = ObjectAnimator.ofFloat(binding.loginButton, View.ALPHA, 1f).setDuration(100)
+        val buttonSignup = ObjectAnimator.ofFloat(binding.signupButton, View.ALPHA, 1f).setDuration(100)
 
         AnimatorSet().apply {
-            playSequentially(title, desc, button)
+            playSequentially(title, desc, buttonLogin, buttonSignup)
             start()
         }
     }
