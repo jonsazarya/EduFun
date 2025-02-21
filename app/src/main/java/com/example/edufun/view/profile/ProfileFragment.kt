@@ -14,7 +14,6 @@ import androidx.lifecycle.Observer
 import com.example.edufun.R
 import com.example.edufun.view.main.MainViewModel
 import com.example.edufun.model.User
-import com.example.edufun.view.welcome.WelcomeActivity
 
 class ProfileFragment : Fragment() {
     private val mainViewModel: MainViewModel by activityViewModels()

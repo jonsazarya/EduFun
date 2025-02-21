@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.edufun.UserRepository
+import com.example.edufun.repo.UserRepository
 import com.example.edufun.model.User
 import kotlinx.coroutines.launch
 

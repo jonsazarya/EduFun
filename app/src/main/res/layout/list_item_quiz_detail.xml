@@ -6,7 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     android:layout_marginTop="8dp"
-    android:layout_marginHorizontal="8dp">
+    android:layout_marginHorizontal="8dp"
+    android:backgroundTint="@color/light_active">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -18,8 +19,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pertanyaan Pertanyaan Pertanyaan Pertanyaan Pertanyaan"
+            android:fontFamily="@font/nunito_semibold"
             android:textSize="16sp"
-            android:textStyle="bold"
+            android:textColor="@color/white"
             android:padding="8dp"/>
 
         <RadioGroup
@@ -27,31 +29,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:backgroundTint="@color/white"
             android:layout_marginTop="8dp">
 
             <RadioButton
                 android:id="@+id/rbOption1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pilihan 1"/>
+                android:text="Pilihan 1"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/white"/>
 
             <RadioButton
                 android:id="@+id/rbOption2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pilihan 2"/>
+                android:text="Pilihan 2"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/white"/>
 
             <RadioButton
                 android:id="@+id/rbOption3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pilihan 3"/>
+                android:text="Pilihan 3"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/white"/>
 
             <RadioButton
                 android:id="@+id/rbOption4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pilihan 4"/>
+                android:text="Pilihan 4"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/white"/>
 
         </RadioGroup>
     </LinearLayout>

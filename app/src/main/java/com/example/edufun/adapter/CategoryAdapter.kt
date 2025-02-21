@@ -10,11 +10,10 @@ import com.example.edufun.R
 import com.example.edufun.model.Category
 
 class CategoryAdapter(
-    private val categories: List<Category>,
+    var categories: List<Category>,
     private val listener: OnCategoryClickListener // Menambahkan listener
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
-    // Interface untuk menangani klik
     interface OnCategoryClickListener {
         fun onCategoryClick(category: Category)
     }
@@ -36,7 +35,6 @@ class CategoryAdapter(
         holder.categoryDesc.text = category.desc
         holder.categoryImage.setImageResource(category.imageResId)
 
-        // Menangani klik item
         holder.itemView.setOnClickListener {
             listener.onCategoryClick(category) // Memanggil listener saat item diklik
         }

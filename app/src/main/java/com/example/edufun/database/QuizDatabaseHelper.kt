@@ -25,6 +25,7 @@ class QuizDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
                 "$COLUMN_TITLE TEXT, " +
                 "$COLUMN_CONTENT TEXT, " +
                 "$COLUMN_CATEGORY_ID INTEGER)")
+            .trimIndent()
         db.execSQL(createTable)
     }
 
@@ -33,14 +34,16 @@ class QuizDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         onCreate(db)
     }
 
-    fun addQuiz(title: String, content: String, categoryId: Int): Long {
+    fun addQuiz(title: String, content: String, categoryId: Int): Int {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_TITLE, title)
             put(COLUMN_CONTENT, content)
             put(COLUMN_CATEGORY_ID, categoryId)
         }
-        return db.insert(TABLE_QUIZZES, null, values)
+        val quizId = db.insert(TABLE_QUIZZES, null, values).toInt()
+        db.close()
+        return quizId
     }
 
     fun getAllQuizzesByCategoryId(categoryId: Int): List<Quiz> {

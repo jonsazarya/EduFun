@@ -6,33 +6,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/light_active"
-    tools:context=".LessonDetailActivity">
+    android:background="@color/background"
+    tools:context=".view.lesson.LessonDetailActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/iv_backgroundImg"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="32dp">
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/iv_background"
+            android:id="@+id/backdrop_image_iv"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:src="@drawable/math"/>
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:src="@color/normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/back_button"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="20dp"
+            android:background="@color/white"
+            app:cardCornerRadius="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/arrow_back"
+                app:tint="@color/black" />
+        </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/poster_image_container"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:cardCornerRadius="100dp"
+            app:layout_constraintBottom_toBottomOf="@id/backdrop_image_iv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/backdrop_image_iv">
+
+            <ImageView
+                android:id="@+id/poster_image_iv"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/math" />
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="MATEMATIKA"
+        android:fontFamily="@font/nunito_extrabold"
         android:textSize="32sp"
-        android:textColor="@color/darker"
+        android:textColor="@color/font"
         android:textStyle="bold"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center"/>
 
@@ -41,18 +76,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DESKRIPSI"
+        android:fontFamily="@font/nunito_reguler"
         android:textSize="16sp"
         android:textStyle="italic"
-        android:textColor="@color/darker"
-        android:layout_marginStart="16dp"
+        android:textColor="@color/font"
+        android:layout_gravity="center"
         android:layout_marginTop="8dp"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/dark"
-        app:tabTextColor="@color/light_active"
+        android:background="@color/normal"
+        app:tabTextColor="@color/light"
         android:layout_marginTop="8dp"/>
 
     <androidx.viewpager2.widget.ViewPager2

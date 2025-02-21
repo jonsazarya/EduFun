@@ -17,7 +17,6 @@ class ChapterDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABA
         private const val COLUMN_TITLE = "title"
         private const val COLUMN_DESCRIPTION = "description"
         private const val COLUMN_CATEGORY_ID = "categoryId"
-        private const val COLUMN_YOUTUBE_LINK = "youtubeLink"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -26,8 +25,7 @@ class ChapterDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABA
                 $COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 $COLUMN_TITLE TEXT NOT NULL,
                 $COLUMN_DESCRIPTION TEXT NOT NULL,
-                $COLUMN_CATEGORY_ID INTEGER NOT NULL,
-                $COLUMN_YOUTUBE_LINK TEXT NOT NULL
+                $COLUMN_CATEGORY_ID INTEGER NOT NULL
             )
         """.trimIndent()
         db.execSQL(createTableQuery)
@@ -38,13 +36,12 @@ class ChapterDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABA
         onCreate(db)
     }
 
-    fun addChapter(title: String, description: String, categoryId: Int, youtubeLink: String) {
+    fun addChapter(title: String, description: String, categoryId: Int) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_TITLE, title)
             put(COLUMN_DESCRIPTION, description)
             put(COLUMN_CATEGORY_ID, categoryId)
-            put(COLUMN_YOUTUBE_LINK, youtubeLink)
         }
         db.insert(TABLE_CHAPTERS, null, values)
         db.close()
@@ -62,7 +59,6 @@ class ChapterDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABA
                         cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
                         cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITLE)),
                         cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_YOUTUBE_LINK)),
                         cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CATEGORY_ID))
                     )
                     chapters.add(chapter)

@@ -1,5 +1,6 @@
-package com.example.edufun.fragment
+package com.example.edufun.view.quiz
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -51,7 +52,11 @@ class QuizFragment : Fragment(), QuizAdapter.OnQuizClickListener {
     }
 
     override fun onQuizClick(quiz: Quiz) {
-        // Handle quiz click event
-        Log.d("QuizFragment", "Quiz clicked: ${quiz.title}")
+        val intent = Intent(requireContext(), QuizDetailActivity::class.java).apply {
+            putExtra("quiz_id", quiz.id)
+            putExtra("quiz_desc", quiz.desc)
+            putExtra("category_id", quiz.categoryId)
+        }
+        startActivity(intent)
     }
 }

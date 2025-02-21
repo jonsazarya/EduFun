@@ -1,4 +1,4 @@
-package com.example.edufun
+package com.example.edufun.repo
 
 
 import com.example.edufun.model.User
@@ -26,9 +26,10 @@ class UserRepository private constructor(
         private var instance: UserRepository? = null
         fun getInstance(
             userPreference: UserPreference
-        ): UserRepository =
-            instance ?: synchronized(this) {
-                instance ?: UserRepository(userPreference)
-            }.also { instance = it }
+        ): UserRepository {
+            return instance ?: synchronized(this) {
+                instance ?: UserRepository(userPreference).also { instance = it }
+            }
+        }
     }
 }

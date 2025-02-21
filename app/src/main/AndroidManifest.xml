@@ -13,11 +13,14 @@
         android:theme="@style/Theme.EduFun"
         tools:targetApi="31">
         <activity
+            android:name=".view.chapter.ChapterDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.signup.SignupActivity"
             android:exported="false" />
         <activity
             android:name=".view.login.LoginActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".view.welcome.WelcomeActivity"
             android:exported="true">
@@ -28,13 +31,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".quiz.QuizActivity"
+            android:name=".view.quiz.QuizDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".AddChapterActivity"
+            android:name=".view.chapter.AddChapterActivity"
             android:exported="false" />
         <activity
-            android:name=".LessonDetailActivity"
+            android:name=".view.lesson.LessonDetailActivity"
             android:exported="false"
             android:theme="@style/Theme.EduFun" />
         <activity

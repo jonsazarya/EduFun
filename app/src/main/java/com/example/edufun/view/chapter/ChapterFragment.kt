@@ -1,7 +1,6 @@
-package com.example.edufun.fragment
+package com.example.edufun.view.chapter
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -53,12 +52,11 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterClickListener {
     }
 
     override fun onChapterClick(chapter: Chapter) {
-        val youtubeLink = chapter.youtubeLink
-        if (youtubeLink.isNotEmpty()) {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeLink))
-            startActivity(intent)
-        } else {
-            Log.w("ChapterFragment", "YouTube link is not provided for chapter: ${chapter.title}")
+        val intent = Intent(requireContext(), ChapterDetailActivity::class.java).apply {
+            putExtra("chapter_title", chapter.title)
+            putExtra("chapter_desc", chapter.description)
+            putExtra("category_id", chapter.categoryId)
         }
+        startActivity(intent)
     }
 }

@@ -19,6 +19,7 @@
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:src="@drawable/logo_edufun"/>
+
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
@@ -42,9 +43,8 @@
                 android:text="@string/halo_sahabat_edufun"
                 android:padding="10dp"
                 android:textColor="@color/black"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif"
+                android:textSize="26sp"
+                android:fontFamily="@font/nunito_extrabold"
                 android:gravity="center"
                 android:alpha="0"
                 tools:alpha="100"/>
@@ -55,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/selamat_datang"
                 android:textSize="16sp"
+                android:fontFamily="@font/nunito_semibold"
                 android:padding="10dp"
                 android:gravity="center"
                 android:alpha="0"
@@ -74,7 +75,8 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="16dp"
                     android:backgroundTint="@color/light_active"
-                    android:text="@string/login" />
+                    android:text="@string/login"
+                    android:fontFamily="@font/nunito_extrabold"/>
 
                 <Button
                     android:id="@+id/signupButton"
@@ -84,7 +86,8 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:backgroundTint="@color/light_active"
-                    android:text="@string/signup" />
+                    android:text="@string/signup"
+                    android:fontFamily="@font/nunito_extrabold"/>
 
 
             </LinearLayout>

@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.edufun.HomeFragment"
-        android:label="Home"
+        android:label="Beranda"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_favorite"
-        android:name="com.example.edufun.favorite.FavoriteFragment"
-        android:label="Notification"
-        tools:layout="@layout/fragment_favorite" />
+        android:id="@+id/navigation_history"
+        android:name="com.example.edufun.view.history.HistoryFragment"
+        android:label="Riwayat"
+        tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.edufun.view.profile.ProfileFragment"
-        android:label="Profile"
+        android:label="Profil"
         tools:layout="@layout/fragment_profile" />
 </navigation>

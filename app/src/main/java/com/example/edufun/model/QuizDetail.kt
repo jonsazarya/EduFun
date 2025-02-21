@@ -2,7 +2,7 @@ package com.example.edufun.model
 
 data class QuizDetail(
     val id: Int,
-    val categoryId: Int,
+    val quizId: Int,
     val question: String,
     val option1: String,
     val option2: String,

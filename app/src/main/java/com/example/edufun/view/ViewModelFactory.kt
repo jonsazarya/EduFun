@@ -3,7 +3,7 @@ package com.example.edufun.view
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.edufun.UserRepository
+import com.example.edufun.repo.UserRepository
 import com.example.edufun.di.Injection
 import com.example.edufun.view.login.LoginViewModel
 import com.example.edufun.view.main.MainViewModel

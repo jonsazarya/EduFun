@@ -1,43 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="12dp"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
     android:background="?android:attr/selectableItemBackground">
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/baseline_quiz_24"/>
-
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginVertical="8dp"
-        android:layout_marginHorizontal="8dp"
-        android:layout_gravity="center">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_quiz_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quiz Title"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/darker" />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:src="@drawable/baseline_quiz_24"
+            android:layout_margin="8dp"/>
 
-        <TextView
-            android:id="@+id/tv_quiz_description"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Quiz description"
-            android:textColor="@color/dark"
-            android:textStyle="italic"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginVertical="8dp"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_quiz_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quiz Title"
+                android:fontFamily="@font/nunito_extrabold"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/font" />
+
+            <TextView
+                android:id="@+id/tv_quiz_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quiz description"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/font"
+                android:textStyle="italic"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+</androidx.cardview.widget.CardView>

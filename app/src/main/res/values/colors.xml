@@ -20,4 +20,10 @@
     <color name="dark_hover">#003380</color>
     <color name="dark_active">#00226C</color>
     <color name="darker">#00226C</color>
+
+    <color name="background">#F3F7FA</color>
+    <color name="font">#464646</color>
+    <color name="basic">#3B74C5</color>
+
+
 </resources>
