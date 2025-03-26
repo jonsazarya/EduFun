@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/background"
-    tools:context=".view.home.HomeFragment">
+    tools:context="view.home.HomeFragment">
 
     <ImageView
         android:id="@+id/backdrop_image_iv"
@@ -25,18 +25,17 @@
         app:cardElevation="8dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        
-        <SearchView
-            android:id="@+id/search_view"
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:queryHint="Cari disini..."
-            android:iconifiedByDefault="false"
-            android:queryBackground="@android:color/transparent"/>
-        
+            app:queryHint="Cari disini..."
+            app:iconifiedByDefault="false"
+            app:searchHintIcon="@null"/>
+
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.cardview.widget.CardView

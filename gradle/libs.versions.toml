@@ -1,6 +1,8 @@
 [versions]
 activityKtx = "1.7.2"
 agp = "8.6.0"
+converterGson = "2.9.0"
+curvedbottomnavigation = "0.1.3"
 datastorePreferences = "1.1.2"
 kotlin = "1.9.0"
 coreKtx = "1.15.0"
@@ -9,12 +11,17 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 lifecycleViewmodelKtx = "2.6.1"
+lottie = "3.7.2"
 material = "1.12.0"
 activity = "1.9.3"
 constraintlayout = "2.2.0"
 cardview = "1.0.0"
 navigationFragmentKtx = "2.8.5"
 navigationUiKtx = "2.8.5"
+retrofitVersion = "2.11.0"
+roomCompiler = "2.6.1"
+roomKtx = "2.6.1"
+roomRuntime = "2.6.1"
 viewpager2 = "1.0.0"
 retrofit = "2.9.0"
 squareupConverterGson = "2.11.0"
@@ -27,11 +34,15 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
+converter-gson-v290 = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+curvedbottomnavigation = { module = "com.github.qamarelsafadi:CurvedBottomNavigation", version.ref = "curvedbottomnavigation" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
@@ -42,6 +53,9 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 converter-gson-v2110 = { module = "com.squareup.retrofit2:converter-gson", version.ref = "squareupConverterGson" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+retrofit-v2110 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

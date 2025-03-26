@@ -1,17 +1,16 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+//    id("com.google.devtools.ksp")
+    id("kotlin-parcelize")
 }
 
 android {
     namespace = "com.example.edufun"
     compileSdk = 35
 
-    viewBinding {
-        enable = true
-    }
-
     buildFeatures {
+        dataBinding = true
         viewBinding = true
         buildConfig = true
     }
@@ -69,4 +68,14 @@ dependencies {
     implementation(libs.converter.gson.v2110)
     implementation(libs.logging.interceptor)
     implementation(libs.glide)
+
+    implementation(libs.androidx.room.runtime)
+//    ksp(libs.room.compiler)
+    implementation(libs.room.ktx)
+
+    implementation(libs.retrofit.v2110)
+    implementation(libs.converter.gson.v290)
+
+    implementation(libs.lottie)
+    implementation(libs.curvedbottomnavigation)
 }

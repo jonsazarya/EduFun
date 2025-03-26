@@ -11,12 +11,13 @@ class ChapterDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABA
 
     companion object {
         private const val DATABASE_NAME = "chapter.db"
-        private const val DATABASE_VERSION = 2
+        private const val DATABASE_VERSION = 3
         private const val TABLE_CHAPTERS = "chapters"
         private const val COLUMN_ID = "id"
         private const val COLUMN_TITLE = "title"
         private const val COLUMN_DESCRIPTION = "description"
         private const val COLUMN_CATEGORY_ID = "categoryId"
+        private const val COLUMN_VIDEO = "video_name"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -25,7 +26,8 @@ class ChapterDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABA
                 $COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 $COLUMN_TITLE TEXT NOT NULL,
                 $COLUMN_DESCRIPTION TEXT NOT NULL,
-                $COLUMN_CATEGORY_ID INTEGER NOT NULL
+                $COLUMN_CATEGORY_ID INTEGER NOT NULL,
+                $COLUMN_VIDEO STRING NOT NULL
             )
         """.trimIndent()
         db.execSQL(createTableQuery)
@@ -36,12 +38,13 @@ class ChapterDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABA
         onCreate(db)
     }
 
-    fun addChapter(title: String, description: String, categoryId: Int) {
+    fun addChapter(title: String, description: String, categoryId: Int, video: String) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_TITLE, title)
             put(COLUMN_DESCRIPTION, description)
             put(COLUMN_CATEGORY_ID, categoryId)
+            put(COLUMN_VIDEO,video)
         }
         db.insert(TABLE_CHAPTERS, null, values)
         db.close()
@@ -59,7 +62,8 @@ class ChapterDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABA
                         cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
                         cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITLE)),
                         cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION)),
-                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CATEGORY_ID))
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CATEGORY_ID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_VIDEO)),
                     )
                     chapters.add(chapter)
                 } while (cursor.moveToNext())

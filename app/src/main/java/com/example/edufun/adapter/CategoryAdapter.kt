@@ -10,7 +10,7 @@ import com.example.edufun.R
 import com.example.edufun.model.Category
 
 class CategoryAdapter(
-    var categories: List<Category>,
+    private var categories: List<Category>,
     private val listener: OnCategoryClickListener // Menambahkan listener
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
@@ -42,5 +42,10 @@ class CategoryAdapter(
 
     override fun getItemCount(): Int {
         return categories.size
+    }
+
+    fun updateList(newList: List<Category>) {
+        categories = newList
+        notifyDataSetChanged()
     }
 }

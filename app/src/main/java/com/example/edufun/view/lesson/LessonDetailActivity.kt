@@ -81,6 +81,7 @@ class LessonDetailActivity : AppCompatActivity(), ChapterAdapter.OnChapterClickL
         intent.putExtra("chapter_title", chapter.title)
         intent.putExtra("chapter_desc", chapter.description)
         intent.putExtra("category_id", chapter.categoryId)
+        intent.putExtra("video_name", chapter.video)
         startActivity(intent)
         finish()
     }

@@ -20,6 +20,7 @@ import com.example.edufun.databinding.ActivityMainBinding
 import com.example.edufun.view.ViewModelFactory
 import com.example.edufun.view.welcome.WelcomeActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.qamar.curvedbottomnaviagtion.CurvedBottomNavigation
 
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MainViewModel> {

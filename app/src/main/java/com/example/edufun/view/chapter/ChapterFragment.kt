@@ -56,6 +56,7 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterClickListener {
             putExtra("chapter_title", chapter.title)
             putExtra("chapter_desc", chapter.description)
             putExtra("category_id", chapter.categoryId)
+            putExtra("video_name", chapter.video)
         }
         startActivity(intent)
     }
