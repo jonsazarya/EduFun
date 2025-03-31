@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/backdrop_image_iv"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="220dp"
         android:scaleType="centerCrop"
         android:src="@color/normal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +37,17 @@
             app:searchHintIcon="@null"/>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/half_round"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:src="@drawable/half_round_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/backdrop_image_iv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/backdrop_image_iv" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_profile"
@@ -91,8 +102,12 @@
         android:id="@+id/page2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/cv_profile">
+        android:background="@color/background"
+        app:layout_constraintTop_toBottomOf="@id/cv_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
