@@ -2,26 +2,56 @@ package com.example.edufun.view.signup
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.edufun.database.UserDatabaseHelper
 import com.example.edufun.databinding.ActivitySignupBinding
+import com.example.edufun.view.welcome.WelcomeActivity
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
+    private lateinit var userDatabaseHelper: UserDatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        userDatabaseHelper = UserDatabaseHelper(this)
+
         setupView()
-        setupAction()
         playAnimation()
+
+        binding.signupButton.setOnClickListener {
+            val singupEmail = binding.emailEditText.text.toString()
+            val singupPassword = binding.passwordEditText.text.toString()
+            if (singupEmail.isEmpty()){
+                binding.emailEditText.error = "Please enter your email"
+            } else if (singupPassword.isEmpty()) {
+                binding.passwordEditText.error = "Please enter your password"
+            } else {
+                signupDatabase(singupEmail, singupPassword)
+            }
+        }
+    }
+
+    private fun signupDatabase(email: String, password: String){
+        val insertRowId = userDatabaseHelper.insertUser(email, password)
+        if (insertRowId != -1L){
+            Toast.makeText(this, "Singup Successful", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, WelcomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        } else {
+            Toast.makeText(this, "Singup Failed", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setupView() {
@@ -35,22 +65,6 @@ class SignupActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
-    }
-
-    private fun setupAction() {
-        binding.signupButton.setOnClickListener {
-            val email = binding.emailEditText.text.toString()
-
-            AlertDialog.Builder(this).apply {
-                setTitle("Yeah!")
-                setMessage("Akun dengan $email sudah jadi nih. Yuk, login dan belajar")
-                setPositiveButton("Lanjut") { _, _ ->
-                    finish()
-                }
-                create()
-                show()
-            }
-        }
     }
 
     private fun playAnimation() {

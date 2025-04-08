@@ -5,32 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.edufun.R
+import com.example.edufun.adapter.HistoryAdapter
+import com.example.edufun.database.AppDatabase
 import com.example.edufun.databinding.FragmentHistoryBinding
+import com.example.edufun.model.History
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HistoryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HistoryFragment : Fragment() {
     private lateinit var binding: FragmentHistoryBinding
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var historyAdapter: HistoryAdapter
+    private var historyList: MutableList<History> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +30,54 @@ class HistoryFragment : Fragment() {
         return binding.root
     }
 
-    private fun moveToHistory(title: String, score: String) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
+        historyAdapter = HistoryAdapter(historyList)
+        binding.rvHistory.adapter = historyAdapter
+
+        loadHistory()
+
+        historyAdapter.setOnDeleteClickListener(object : HistoryAdapter.OnDeleteClickListener {
+            override fun onDeleteClick(position: Int) {
+                deleteHistoryItem(position)
+            }
+        })
+    }
+
+    private fun loadHistory() {
+        GlobalScope.launch(Dispatchers.IO) {
+            val database = AppDatabase.getDatabase(requireContext())
+            val fetchedHistory = database.quizHistoryDao().getAllQuiz()
+
+            withContext(Dispatchers.Main) {
+                historyList.clear()
+                historyList.addAll(fetchedHistory)
+                historyAdapter.notifyDataSetChanged()
+
+                if (historyList.isEmpty()){
+                    binding.rvHistory.visibility = View.GONE
+                    binding.tvNotFound.visibility = View.VISIBLE
+                } else {
+                    binding.rvHistory.visibility = View.VISIBLE
+                    binding.tvNotFound.visibility = View.GONE
+                }
+            }
+        }
+    }
+
+    private fun deleteHistoryItem(position: Int) {
+        val quizToDelete = historyList[position]
+        GlobalScope.launch(Dispatchers.IO) {
+            val database = AppDatabase.getDatabase(requireContext())
+            database.quizHistoryDao().deleteQuiz(quizToDelete)
+
+            withContext(Dispatchers.Main) {
+                historyList.removeAt(position)
+                historyAdapter.notifyItemRemoved(position)
+                Toast.makeText(requireContext(), "History deleted", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

@@ -8,7 +8,7 @@ import com.example.edufun.repo.UserRepository
 import com.example.edufun.model.User
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val repository: UserRepository) : ViewModel() {
+class MainViewModel(val repository: UserRepository) : ViewModel() {
     fun getSession(): LiveData<User> {
         return repository.getSession().asLiveData()
     }

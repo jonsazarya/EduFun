@@ -2,12 +2,17 @@
 
     import android.content.Intent
     import android.os.Bundle
+    import android.os.Handler
+    import android.os.Looper
     import android.view.LayoutInflater
     import android.view.View
     import android.view.ViewGroup
     import android.widget.Toast
     import androidx.appcompat.widget.SearchView
     import androidx.fragment.app.Fragment
+    import androidx.fragment.app.activityViewModels
+    import androidx.fragment.app.viewModels
+    import androidx.lifecycle.Observer
     import androidx.recyclerview.widget.LinearLayoutManager
     import com.example.edufun.adapter.CategoryAdapter
     import com.example.edufun.database.CategoryDatabaseHelper
@@ -16,7 +21,10 @@
     import com.example.edufun.database.QuizDetailDatabaseHelper
     import com.example.edufun.databinding.FragmentHomeBinding
     import com.example.edufun.model.Category
+    import com.example.edufun.model.User
+    import com.example.edufun.view.ViewModelFactory
     import com.example.edufun.view.lesson.LessonDetailActivity
+    import com.example.edufun.view.main.MainViewModel
     import java.util.Locale
 
     class HomeFragment : Fragment(), CategoryAdapter.OnCategoryClickListener {
@@ -26,19 +34,26 @@
         private lateinit var chapterDatabaseHelper: ChapterDatabaseHelper
         private lateinit var quizDatabaseHelper: QuizDatabaseHelper
         private lateinit var quizDetailDatabaseHelper: QuizDetailDatabaseHelper
+        private val mainViewModel: MainViewModel by viewModels {
+            ViewModelFactory.getInstance(requireContext())
+        }
         private lateinit var categoryAdapter: CategoryAdapter
         private var categories: List<Category> = emptyList()
 
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
-        ): View? {
+        ): View {
             binding = FragmentHomeBinding.inflate(inflater, container, false)
 
             categoryDatabaseHelper = CategoryDatabaseHelper(requireContext())
             chapterDatabaseHelper = ChapterDatabaseHelper(requireContext())
             quizDatabaseHelper = QuizDatabaseHelper(requireContext())
             quizDetailDatabaseHelper = QuizDetailDatabaseHelper(requireContext())
+
+            mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
+                updateUI(user)
+            }
 
             addSampleData()
             setupRecyclerView()
@@ -120,10 +135,16 @@
         }
 
         private fun setupRecyclerView() {
-            categories = categoryDatabaseHelper.getAllCategories()
-            categoryAdapter = CategoryAdapter(categories, this)
-            binding.rvCategory.layoutManager = LinearLayoutManager(requireContext())
-            binding.rvCategory.adapter = categoryAdapter
+            binding.progressBar.visibility = View.VISIBLE
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                categories = categoryDatabaseHelper.getAllCategories()
+                categoryAdapter = CategoryAdapter(categories, this)
+                binding.rvCategory.layoutManager = LinearLayoutManager(requireContext())
+                binding.rvCategory.adapter = categoryAdapter
+
+                binding.progressBar.visibility = View.GONE
+            }, 1000)
         }
 
         private fun setupSearchView() {
@@ -150,7 +171,7 @@
                     }
                 }
 
-                if (filteredList.isEmpty()) {
+                if (filteredList.isNullOrEmpty()) {
                     Toast.makeText(requireContext(), "No data found", Toast.LENGTH_SHORT).show()
                 } else {
                     categoryAdapter.updateList(filteredList)
@@ -158,6 +179,9 @@
             }
         }
 
+        private fun updateUI(user: User) {
+            binding.tvUsername.text = user.email.ifEmpty { "Hai! User" }
+        }
 
         override fun onCategoryClick(category: Category) {
             val intent = Intent(requireContext(), LessonDetailActivity::class.java)

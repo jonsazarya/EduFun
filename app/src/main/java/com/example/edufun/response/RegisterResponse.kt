@@ -1,10 +1,13 @@
 package com.example.edufun.response
 
-import com.example.edufun.model.User
+import com.google.gson.annotations.SerializedName
 
 data class RegisterResponse(
-    val success: Boolean,        // Menunjukkan apakah pendaftaran berhasil
-    val message: String,        // Pesan yang menjelaskan hasil pendaftaran
-    val user: User?             // Data pengguna yang terdaftar, bisa null jika gagal
+
+    @field:SerializedName("error")
+    val message: String? = null,
+
+    @field:SerializedName("token")
+    val token: String? = null
 )
 

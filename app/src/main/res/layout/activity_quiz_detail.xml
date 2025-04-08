@@ -90,5 +90,14 @@
             android:backgroundTint="@color/light_active"
             android:layout_marginTop="8dp"/>
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/normal"
+            android:visibility="gone"
+            style="?android:attr/progressBarStyleLarge"/>
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

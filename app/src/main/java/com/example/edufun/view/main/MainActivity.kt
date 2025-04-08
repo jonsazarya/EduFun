@@ -17,6 +17,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.edufun.R
 import com.example.edufun.databinding.ActivityMainBinding
+import com.example.edufun.model.User
 import com.example.edufun.view.ViewModelFactory
 import com.example.edufun.view.welcome.WelcomeActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView

@@ -1,6 +1,6 @@
 package com.example.edufun.repo
 
-
+import androidx.lifecycle.LiveData
 import com.example.edufun.model.User
 import com.example.edufun.pref.UserPreference
 import kotlinx.coroutines.flow.Flow
@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.Flow
 class UserRepository private constructor(
     private val userPreference: UserPreference
 ) {
-
     suspend fun saveSession(user: User) {
         userPreference.saveSession(user)
     }

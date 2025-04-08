@@ -3,6 +3,8 @@ package com.example.edufun.view.quiz
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.WindowInsets
@@ -64,6 +66,8 @@ class QuizDetailActivity : AppCompatActivity() {
             val title =  binding.tvQuizDescription.text
 
             if (score != null) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
                 Toast.makeText(this, "Cek skor kamu di riwayat", Toast.LENGTH_SHORT).show()
                 saveQuizToDatabase(title.toString(), score.toString())
             } else {
@@ -73,26 +77,37 @@ class QuizDetailActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        quizViewModel.getQuizzesByQuizId(quizId).observe(this, Observer { quizzes ->
-            if (quizzes.isEmpty()) {
-                binding.rvQuiz.visibility = View.GONE
-                binding.btnSubmit.visibility = View.GONE
-                binding.tvNoQuizzes.visibility = View.VISIBLE
-            } else {
-                quizDetailAdapter = QuizDetailAdapter(quizzes, this) { quiz, s ->
-                    if (s == quiz.answer) {
-                        correctAnswer++
-                    } else {
-                        inCorrectAnswer++
-                    }
-                }
+        binding.progressBar.visibility = View.VISIBLE
+        binding.rvQuiz.visibility = View.GONE
+        binding.tvNoQuizzes.visibility = View.GONE
+        binding.btnSubmit.visibility = View.GONE
 
-                binding.rvQuiz.layoutManager = LinearLayoutManager(this)
-                binding.rvQuiz.adapter = quizDetailAdapter
-                binding.rvQuiz.visibility = View.VISIBLE
-                binding.tvNoQuizzes.visibility = View.GONE
-            }
-        })
+        Handler(Looper.getMainLooper()).postDelayed({
+            quizViewModel.getQuizzesByQuizId(quizId).observe(this, Observer { quizzes ->
+                binding.progressBar.visibility = View.GONE
+
+                if (quizzes.isEmpty()) {
+                    binding.rvQuiz.visibility = View.GONE
+                    binding.btnSubmit.visibility = View.GONE
+                    binding.tvNoQuizzes.visibility = View.VISIBLE
+                } else {
+                    quizDetailAdapter = QuizDetailAdapter(quizzes, this) { quiz, s ->
+                        if (s == quiz.answer) {
+                            correctAnswer++
+                        } else {
+                            inCorrectAnswer++
+                        }
+                    }
+
+                    binding.rvQuiz.layoutManager = LinearLayoutManager(this)
+                    binding.rvQuiz.adapter = quizDetailAdapter
+                    binding.rvQuiz.visibility = View.VISIBLE
+                    binding.btnSubmit.visibility = View.VISIBLE
+                    binding.tvNoQuizzes.visibility = View.GONE
+                }
+            })
+        }, 1000)
+
     }
 
     private fun setupView() {
@@ -111,28 +126,6 @@ class QuizDetailActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
     }
-
-//    private fun showScoreDialog() {
-//        val score = correctAnswer * 20
-//        val builder = AlertDialog.Builder(this)
-//        builder.setTitle("Skor Kamu")
-//        builder.setMessage("Skor kamu : $score\nJumlah benar : $correctAnswer\nJumlah salah $inCorrectAnswer")
-//
-//        builder.setPositiveButton("Lanjut") { dialog, which ->
-//            val intent = Intent(this, MainActivity::class.java)
-//            saveQuizToDatabase(title = , score = score)
-//            startActivity(intent)
-//            Toast.makeText(this, "Cek skor kamu di Riwayat", Toast.LENGTH_SHORT).show()
-//            dialog.dismiss()
-//        }
-//
-//        builder.setNegativeButton("Batal") { dialog, _ ->
-//            dialog.dismiss()
-//        }
-//
-//        val dialog = builder.create()
-//        dialog.show()
-//    }
 
     private fun moveToHistory(title: String, score: String) {
         val intent = Intent(this, HistoryFragment::class.java)
