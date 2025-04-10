@@ -1,6 +1,6 @@
 # EduFun  
   
-EduFun adalah aplikasi pembelajaran interaktif berbasis Android yang dirancang untuk siswa, khususnya di tingkat sekolah dasar. Aplikasi ini bertujuan untuk menyediakan materi pembelajaran yang menarik dan menyenangkan, serta fitur-fitur yang mendukung proses belajar, seperti kuis, forum diskusi, dan pemantauan kemajuan belajar.  
+EduFun adalah aplikasi pembelajaran interaktif berbasis Android yang dirancang untuk siswa, khususnya di tingkat 1 sekolah menengah pertama. Aplikasi ini bertujuan untuk menyediakan materi pembelajaran yang menarik dan menyenangkan, serta fitur-fitur yang mendukung proses belajar, seperti kuis, forum diskusi, dan pemantauan kemajuan belajar.  
   
 ## Fitur  
   
