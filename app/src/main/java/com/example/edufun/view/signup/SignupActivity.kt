@@ -11,46 +11,55 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.edufun.database.UserDatabaseHelper
+import com.example.edufun.database.EdufunDatabaseHelper
 import com.example.edufun.databinding.ActivitySignupBinding
 import com.example.edufun.view.welcome.WelcomeActivity
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
-    private lateinit var userDatabaseHelper: UserDatabaseHelper
+    private lateinit var edufunDatabaseHelper: EdufunDatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userDatabaseHelper = UserDatabaseHelper(this)
+        edufunDatabaseHelper = EdufunDatabaseHelper(this)
 
         setupView()
         playAnimation()
 
         binding.signupButton.setOnClickListener {
-            val singupEmail = binding.emailEditText.text.toString()
-            val singupPassword = binding.passwordEditText.text.toString()
-            if (singupEmail.isEmpty()){
-                binding.emailEditText.error = "Please enter your email"
-            } else if (singupPassword.isEmpty()) {
-                binding.passwordEditText.error = "Please enter your password"
+            val signupName = binding.nameEditText.text.toString()
+            val signupEmail = binding.emailEditText.text.toString()
+            val signupPassword = binding.passwordEditText.text.toString()
+            if (signupName.isEmpty()){
+                binding.nameEditText.error = "Masukkan nama anda"
+            } else if (signupEmail.isEmpty()) {
+                binding.emailEditText.error = "Masukkan email anda"
+            } else if (!signupEmail.contains("@")) {
+                binding.emailEditText.error = "Email harus mengandung '@"
+            } else if (signupPassword.isEmpty()) {
+                binding.passwordEditText.error = "Masukkan password anda"
+            } else if (signupPassword.length < 6) {
+                binding.passwordEditText.error = "Password minimal 6 karakter"
+            } else if (edufunDatabaseHelper.isEmailExist(signupEmail)) {
+                Toast.makeText(this, "Email sudah terdaftar", Toast.LENGTH_SHORT).show()
             } else {
-                signupDatabase(singupEmail, singupPassword)
+                signupDatabase(signupName, signupEmail, signupPassword)
             }
         }
     }
 
-    private fun signupDatabase(email: String, password: String){
-        val insertRowId = userDatabaseHelper.insertUser(email, password)
+    private fun signupDatabase(name: String, email: String, password: String){
+        val insertRowId = edufunDatabaseHelper.insertUser(name, email, password)
         if (insertRowId != -1L){
-            Toast.makeText(this, "Singup Successful", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Registrasi berhasil", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, WelcomeActivity::class.java)
             startActivity(intent)
             finish()
         } else {
-            Toast.makeText(this, "Singup Failed", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Registrasi gagal", Toast.LENGTH_SHORT).show()
         }
     }
 

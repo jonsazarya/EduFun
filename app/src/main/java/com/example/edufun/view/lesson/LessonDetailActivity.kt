@@ -12,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.edufun.R
 import com.example.edufun.adapter.ChapterAdapter
 import com.example.edufun.adapter.SectionsPagerAdapter
-import com.example.edufun.database.ChapterDatabaseHelper
+import com.example.edufun.database.EdufunDatabaseHelper
 import com.example.edufun.databinding.ActivityLessonDetailBinding
 import com.example.edufun.model.Chapter
 import com.example.edufun.view.chapter.ChapterDetailActivity
@@ -22,7 +22,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class LessonDetailActivity : AppCompatActivity(), ChapterAdapter.OnChapterClickListener {
 
     private lateinit var binding: ActivityLessonDetailBinding
-    private lateinit var chapterDatabaseHelper: ChapterDatabaseHelper
+    private lateinit var edufunDatabaseHelper: EdufunDatabaseHelper
     private lateinit var chapterAdapter: ChapterAdapter
 
     companion object {
@@ -56,7 +56,7 @@ class LessonDetailActivity : AppCompatActivity(), ChapterAdapter.OnChapterClickL
 
         supportActionBar?.elevation = 0f
 
-        chapterDatabaseHelper = ChapterDatabaseHelper(this)
+        edufunDatabaseHelper = EdufunDatabaseHelper(this)
 
         val lessonTitle = intent.getStringExtra("lesson_title") ?: "Mata Pelajaran"
         val lessonDesc = intent.getStringExtra("lesson_desc") ?: "Deskripsi Mata Pelajaran"

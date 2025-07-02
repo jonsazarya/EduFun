@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.edufun.database.EdufunDatabaseHelper
 import com.example.edufun.databinding.ActivityLoginBinding
 import com.example.edufun.model.User
 import com.example.edufun.pref.UserPreference
@@ -31,13 +32,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-//        binding.loginButton.setOnClickListener {
-//            val username = binding.emailEditText.text.toString()
-//            val password = binding.passwordEditText.text.toString()
-//
-//            validateLogin(username, password)
-//        }
 
         setupView()
         setupAction()
@@ -61,43 +55,45 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
-            viewModel.saveSession(User(email, password, true))
+
             if (email.isEmpty()){
-                binding.emailEditText.error = "Please enter your email"
-            } else if (password.isEmpty()){
-                binding.passwordEditText.error = "Please enter your password"
+                binding.emailEditText.error = "Masukkan email anda"
+            } else if (!email.contains("@")) {
+                binding.emailEditText.error = "Email harus mengandung '@'"
+            } else if (password.length < 6) {
+                binding.passwordEditText.error = "Password minimal 6 karakter"
+            }else if (password.isEmpty()){
+                binding.passwordEditText.error = "Masukkan password anda"
             } else {
-                AlertDialog.Builder(this).apply {
-                    setTitle("Yeah!")
-                    setMessage("Anda berhasil login. Sudah tidak sabar untuk belajar ya?")
-                    setPositiveButton("Lanjut") { _, _ ->
-                        val intent = Intent(context, MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                        startActivity(intent)
-                        finish()
+                val dbHelper = EdufunDatabaseHelper(this)
+
+                if (dbHelper.readUser(email, password)) {
+                    val user = dbHelper.getUserByEmail(email)
+                    if (user != null) {
+                        viewModel.saveSession(user)
+                        AlertDialog.Builder(this).apply {
+                            setTitle("Yeah!")
+                            setMessage("Anda berhasil login. Sudah tidak sabar untuk belajar ya?")
+                            setPositiveButton("Lanjut") { _, _ ->
+                                val intent = Intent(context, MainActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                startActivity(intent)
+                                finish()
+                            }
+                            create()
+                            show()
+                        }
+                    } else {
+                        Toast.makeText(this, "Gagal mengambil data user", Toast.LENGTH_SHORT).show()
                     }
-                    create()
-                    show()
+                } else if (dbHelper.isEmailExist(email)) {
+                    Toast.makeText(this, "Password salah", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Email tidak terdaftar", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
-
-//    private fun validateLogin(username: String, password: String) {
-//        if (username.isNotEmpty() && password.isNotEmpty()) {
-//            if (username == "user" && password == "pass") {
-//                val user = User(username, password)
-//                viewModel.saveSession(user)
-//
-//                startActivity(Intent(this, MainActivity::class.java))
-//                finish()
-//            } else {
-//                Toast.makeText(this, "Username atau password salah", Toast.LENGTH_SHORT).show()
-//            }
-//        } else {
-//            Toast.makeText(this, "Harap masukkan username dan password", Toast.LENGTH_SHORT).show()
-//        }
-//    }
 
     private fun playAnimation() {
         ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {

@@ -9,14 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.edufun.adapter.ChapterAdapter
-import com.example.edufun.database.ChapterDatabaseHelper
+import com.example.edufun.database.EdufunDatabaseHelper
 import com.example.edufun.databinding.FragmentChapterBinding
 import com.example.edufun.model.Chapter
 
 class ChapterFragment : Fragment(), ChapterAdapter.OnChapterClickListener {
 
     private lateinit var binding: FragmentChapterBinding
-    private lateinit var chapterDatabaseHelper: ChapterDatabaseHelper
+    private lateinit var edufunDatabaseHelper: EdufunDatabaseHelper
     private lateinit var chapterAdapter: ChapterAdapter
 
     override fun onCreateView(
@@ -30,7 +30,7 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        chapterDatabaseHelper = ChapterDatabaseHelper(requireContext())
+        edufunDatabaseHelper =EdufunDatabaseHelper(requireContext())
 
         val categoryId = arguments?.getInt("category_id", 0) ?: 0
         Log.d("ChapterFragment", "Category ID received: $categoryId")
@@ -40,7 +40,7 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterClickListener {
 
     private fun setupRecyclerView(categoryId: Int) {
         try {
-            val chapters = chapterDatabaseHelper.getAllChaptersByCategoryId(categoryId)
+            val chapters = edufunDatabaseHelper.getAllChaptersByCategoryId(categoryId)
             Log.d("ChapterFragment", "Chapters retrieved: ${chapters.size}")
 
             chapterAdapter = ChapterAdapter(chapters, this)

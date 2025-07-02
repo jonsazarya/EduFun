@@ -1,0 +1,423 @@
+{
+  "categories": [
+    {
+      "name": "Matematika",
+      "description": "Matematika itu menyenangkan",
+      "image_res_id": "math",
+      "chapters": [
+        {"title": "Bab 1", "description": "Bilangan Bulat", "video": "math_1"},
+        {"title": "Bab 2", "description": "Operasi Bilangan Bulat (Perpangkatan)", "video": "math_2"},
+        {"title": "Bab 3", "description": "Bilangan Pecahan", "video": "math_3"}
+      ],
+      "quizzes": [
+        {
+          "title": "Kuis 1",
+          "description": "Bilangan Bulat",
+          "questions": [
+            {
+              "question": "Hasil dari -15 + 20 adalah ...",
+              "options": ["-5", "5", "35", "-35"],
+              "answer": "5"
+            },
+            {
+              "question": "Hasil dari 12 - (-8) adalah ...",
+              "options": ["4", "-4", "20", "-20"],
+              "answer": "20"
+            },
+            {
+              "question": "Hasil dari -7 x 6 adalah ...",
+              "options": ["42", "-42", "13", "-13"],
+              "answer": "-42"
+            },
+            {
+              "question": "Hasil dari -48/(-6) adalah ...",
+              "options": ["8", "-8", "6", "-6"],
+              "answer": "8"
+            },
+            {
+              "question": "Hasil dari −12 + 7 − 12 + 7 adalah ...",
+              "options": ["5", "-5", "19", "-19"],
+              "answer": "-5"
+            },
+            {
+              "question": "Bilangan bulat yang terletak antara -4 dan 2 adalah ...",
+              "options": ["-6, -2, 3", "-3, -2, -1, 0, 1", "-5, -3, -1, 0, 2", "-2, 0, 2, 3"],
+              "answer": "-3, -2, -1, 0, 1"
+            },
+            {
+              "question": "Hasil dari (−8)×(−3)(−8)×(−3) adalah ...",
+              "options": ["-24", "24", "-11", "11"],
+              "answer": "24"
+            },
+            {
+              "question": "Suhu di sebuah kota pada pagi hari adalah 6°C. Pada malam hari, suhunya turun 10°C. Suhu malam hari menjadi ...",
+              "options": [" 4°C", "-4°C", "-6°C", "6°C"],
+              "answer": "-4°C"
+            },
+            {
+              "question": "Hasil dari 36÷(−6)36÷(−6) adalah ...",
+              "options": ["6", "-6", "-30", "-216"],
+              "answer": "-6"
+            },
+            {
+              "question": "Sifat komutatif perkalian menunjukkan bahwa untuk setiap bilangan bulat a dan b berlaku ...",
+              "options": ["a + b = b + a", "a x b = b x a", "a - b = b - a", "a / b = b / a"],
+              "answer": "a x b = b x a"
+            }
+          ]
+        },
+        {
+          "title": "Kuis 3",
+          "description": "Bilangan Pecahan",
+          "questions": [
+            {
+              "question": "Hasil dari 2/5 + 1/5 adalah ...",
+              "options": ["3/5", "1/5", "2/10", "1/2"],
+              "answer": "3/5"
+            },
+            {
+              "question": "Hasil dari 3/4 - 1/2 adalah ...",
+              "options": ["1/4", "1/2", "3/8", "5/8"],
+              "answer": "1/4"
+            },
+            {
+              "question": "Hasil dari 2/3 x 3/5 adalah ...",
+              "options": ["6/15", "1/5", "2/5", "1/3"],
+              "answer": "2/5"
+            },
+            {
+              "question": "Hasil dari 4/5 ÷ 2/3 adalah ...",
+              "options": ["12/10", "6/5", "8/15", "2/3"],
+              "answer": "6/5"
+            },
+            {
+              "question": "Hasil dari 3/4 + 3/2  adalah ...",
+              "options": ["5/7", "17/12", "13/12", "1/2"],
+              "answer": "13/12"
+            },
+            {
+              "question": "Hasil dari 5/6 - 1/4 adalah ...",
+              "options": ["4/10", "3/8", "7/12", "9/10"],
+              "answer": "7/12"
+            },
+            {
+              "question": "Hasil dari 2/5 x 3/4 adalah ...",
+              "options": ["5/8", "3/10", "6/20", "8/15"],
+              "answer": "3/10"
+            },
+            {
+              "question": "Hasil dari 7/8 ÷ 2/3 adalah ...",
+              "options": ["14/11", "21/16", "8/7", "9/10"],
+              "answer": "21/16"
+            },
+            {
+              "question": "Pecahan 8/12 dapat disederhanakan menjadi ...",
+              "options": ["2/3", "3/4", "4/6", "1/2"],
+              "answer": "2/3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "IPA",
+      "description": "IPA itu menyenangkan",
+      "image_res_id": "science",
+      "chapters": [
+        {"title": "Bab 1", "description": "Hakikat Ilmu Sains & Metode Ilmiah", "video": "science_1"},
+        {"title": "Bab 2", "description": "Zat dan Perubahannya", "video": "science_2"},
+        {"title": "Bab 3", "description": "Suhu Kalor Pemuaian", "video": "science_3"}
+      ],
+      "quizzes": [
+        {
+          "title": "Kuis 1",
+          "description": "Hakikat Ilmu Sains & Metode Ilmiah",
+          "questions": [
+            {
+              "question": "Ilmu sains adalah suatu cara untuk ...",
+              "options": ["Memprediksi masa depan", "Mengumpulkan dan menganalisis data untuk memahami fenomena alam", "Mengembangkan teknologi tanpa dasar penelitian", "Menyebarkan informasi tanpa bukti"],
+              "answer": "Mengumpulkan dan menganalisis data untuk memahami fenomena alam"
+            },
+            {
+              "question": "Salah satu karakteristik ilmu pengetahuan adalah ...",
+              "options": ["Bersifat absolut dan tidak dapat berubah", "Didasarkan pada pengamatan dan eksperimen", "Hanya berlaku untuk fenomena yang tidak dapat dijelaskan", "Mengandalkan opini pribadi"],
+              "answer": "Didasarkan pada pengamatan dan eksperimen"
+            },
+            {
+              "question": "Langkah pertama dalam metode ilmiah adalah ...",
+              "options": ["Mengumpulkan data", "Membuat hipotesis", "Mengajukan pertanyaan", "Melakukan eksperimen"],
+              "answer": "Mengajukan pertanyaan"
+            },
+            {
+              "question": "Hipotesis dalam penelitian ilmiah adalah ...",
+              "options": ["Kesimpulan akhir dari penelitian", "Pernyataan yang dapat diuji dan dibuktikan", "Data yang dikumpulkan selama eksperimen", "Teori yang sudah diterima secara umum"],
+              "answer": "Pernyataan yang dapat diuji dan dibuktikan"
+            },
+            {
+              "question": "Observasi dalam metode ilmiah dilakukan untuk ...",
+              "options": ["Mengabaikan data yang tidak relevan", "Mengumpulkan informasi awal sebelum eksperimen", "Menyimpulkan hasil tanpa bukti", "Mengembangkan teori baru tanpa pengujian"],
+              "answer": "Mengumpulkan informasi awal sebelum eksperimen"
+            },
+            {
+              "question": "Tujuan utama dari eksperimen dalam metode ilmiah adalah ...",
+              "options": ["Membuktikan opini peneliti", "Mengumpulkan data untuk menguji hipotesis", "Mendapatkan hasil yang diinginkan", "Menghindari pengamatan langsung"],
+              "answer": "Mengumpulkan data untuk menguji hipotesis"
+            },
+            {
+              "question": "Langkah terakhir dalam metode ilmiah adalah ...",
+              "options": ["Merancang eksperimen baru", "Mengajukan pertanyaan", "Menarik kesimpulan", "Membuat hipotesis baru"],
+              "answer": "Menarik kesimpulan"
+            },
+            {
+              "question": "Sebuah teori ilmiah bisa berubah jika ...",
+              "options": ["Banyak orang tidak setuju", "Ada penemuan baru yang didukung oleh data", "Teori tersebut sudah terlalu lama", "Teori tersebut sulit dipahami"],
+              "answer": "Ada penemuan baru yang didukung oleh data"
+            },
+            {
+              "question": "Ilmu pengetahuan bersifat objektif, artinya ...",
+              "options": ["Hanya mengikuti opini mayoritas", "Bebas dari pengaruh pribadi atau prasangka", "Mengandalkan perasaan peneliti", "Selalu menghasilkan hasil yang diinginkan"],
+              "answer": "Bebas dari pengaruh pribadi atau prasangka"
+            }
+          ]
+        },
+        {
+          "title": "Kuis 2",
+          "description": "Zat dan Perubahannya",
+          "questions": [
+            {
+              "question": "Zat dapat didefinisikan sebagai ...",
+              "options": ["Segala sesuatu yang memiliki massa dan volume", "Hanya benda padat yang dapat dilihat", "Hanya cairan yang dapat mengalir", "Energi yang tidak memiliki massa"],
+              "answer": "Segala sesuatu yang memiliki massa dan volume"
+            },
+            {
+              "question": "Sifat fisika dari suatu zat adalah ...",
+              "options": ["Sifat yang berubah ketika zat mengalami reaksi kimia", "Sifat yang dapat diamati tanpa mengubah komposisi zat", "Sifat yang hanya dapat diukur dengan alat khusus", "Sifat yang tidak dapat diukur"],
+              "answer": "Sifat yang dapat diamati tanpa mengubah komposisi zat"
+            },
+            {
+              "question": "Contoh perubahan fisika adalah ...",
+              "options": ["Pembakaran kayu", "Pembekuan air menjadi es", "Reaksi asam dan basa", "Fermentasi gula menjadi alkohol"],
+              "answer": "Pembekuan air menjadi es"
+            },
+            {
+              "question": "Perubahan kimia ditandai dengan ...",
+              "options": ["Perubahan bentuk fisik zat", "Terjadinya reaksi yang menghasilkan zat baru", "Perubahan suhu tanpa reaksi", "Perubahan warna tanpa reaksi"],
+              "answer": "Terjadinya reaksi yang menghasilkan zat baru"
+            },
+            {
+              "question": "Zat yang memiliki bentuk tetap dan volume tetap adalah ...",
+              "options": ["Gas", "Cair", "Padat", "Plasma"],
+              "answer": "Padat"
+            },
+            {
+              "question": "Perubahan kimia yang terjadi saat kertas dibakar adalah ...",
+              "options": ["Perubahan warna saja", "Perubahan bentuk saja", "Terbentuknya zat baru berupa abu dan gas", "Pencairan zat padat"],
+              "answer": "Terbentuknya zat baru berupa abu dan gas"
+            },
+            {
+              "question": "Air yang menguap menjadi uap air termasuk perubahan ...",
+              "options": ["Kimia", "Fisik", "Biologis", "Kompleks"],
+              "answer": "Fisik"
+            },
+            {
+              "question": "Campuran antara pasir dan air termasuk campuran ...",
+              "options": ["Homogen", "Heterogen", "Koloid", "Emulsi"],
+              "answer": "Heterogen"
+            },
+            {
+              "question": "Contoh perubahan kimia dalam kehidupan sehari-hari adalah ...",
+              "options": ["Air membeku menjadi es", "Besi berkarat", "Es mencair", "Air menguap"],
+              "answer": "Besi berkarat"
+            },
+            {
+              "question": "Pemisahan campuran berdasarkan perbedaan titik didih disebut ...",
+              "options": ["Filtrasi", "Distilasi", "Dekantasi", "Sentrifugasi"],
+              "answer": "Distilasi"
+            }
+          ]
+        },
+        {
+          "title": "Kuis 3",
+          "description": "Suhu Kalor Pemuaian",
+          "questions": [
+            {
+              "question": "Suhu adalah ukuran dari ...",
+              "options": ["Jumlah kalor yang terkandung dalam suatu benda", "Energi kinetik rata-rata partikel dalam suatu benda", "Massa jenis suatu benda", "Volume suatu benda"],
+              "answer": "Energi kinetik rata-rata partikel dalam suatu benda"
+            },
+            {
+              "question": "Kalor adalah ...",
+              "options": ["Suhu suatu benda", "Energi yang berpindah dari benda bersuhu tinggi ke benda bersuhu rendah", "Massa jenis suatu benda", "Volume suatu benda"],
+              "answer": "Energi yang berpindah dari benda bersuhu tinggi ke benda bersuhu rendah"
+            },
+            {
+              "question": "Jika suatu zat menerima kalor, maka ...",
+              "options": ["Suhu zat tersebut pasti turun", "Suhu zat tersebut pasti naik", "Suhu zat tersebut bisa naik atau tetap, tergantung pada jenis zat", "Suhu zat tersebut tidak akan berubah"],
+              "answer": "Suhu zat tersebut bisa naik atau tetap, tergantung pada jenis zat"
+            },
+            {
+              "question": "Pemuaian terjadi karena ...",
+              "options": ["Penurunan suhu yang menyebabkan partikel bergerak lebih lambat", "Peningkatan suhu yang menyebabkan partikel bergerak lebih cepat dan menjauh", "Penambahan massa zat", "Pengurangan volume zat"],
+              "answer": "Peningkatan suhu yang menyebabkan partikel bergerak lebih cepat dan menjauh"
+            },
+            {
+              "question": "Contoh pemanfaatan pemuaian dalam kehidupan sehari-hari adalah ...",
+              "options": ["Penggunaan termometer bimetal", "Pembuatan es krim", "Penggunaan kompor listrik", "Pembuatan pupuk"],
+              "answer": "Penggunaan termometer bimetal"
+            },
+            {
+              "question": "Satuan internasional (SI) untuk suhu adalah ...",
+              "options": ["Celsius", "Fahrenheit", "Kelvin", "Reamur"],
+              "answer": "Kelvin"
+            },
+            {
+              "question": "Zat yang memiliki laju pemuaian terbesar umumnya adalah ...",
+              "options": ["Padat", "Cair", "Gas", "Campuran"],
+              "answer": "Gas"
+            },
+            {
+              "question": "Termometer bekerja berdasarkan prinsip ...",
+              "options": ["Perubahan massa", "Pemuaian zat cair", "Pembiasan cahaya", "Peleburan es"],
+              "answer": "Pemuaian zat cair"
+            },
+            {
+              "question": "Perpindahan kalor secara konduksi terjadi pada ...",
+              "options": ["Cairan", "Gas", "Benda padat", "Vakum"],
+              "answer": "Benda padat"
+            },
+            {
+              "question": "Kalor jenis suatu zat menunjukkan ...",
+              "options": ["Jumlah kalor total dalam zat", "Kemampuan zat menyerap kalor per satuan massa dan suhu", "Berat zat secara keseluruhan", "Titik didih zat"],
+              "answer": "Kemampuan zat menyerap kalor per satuan massa dan suhu"
+            }
+          ]
+        }
+
+      ]
+    },
+    {
+      "name": "Bahasa Inggris",
+      "description": "Bahasa Inggris itu menyenangkan",
+      "image_res_id": "english",
+      "chapters": [
+        {"title": "Bab 1", "description": "Greeting, Thank You, and Sorry", "video": "english_1"},
+        {"title": "Bab 2", "description": "Identities, Hobbies, Family Members", "video": "english_2"},
+        {"title": "Bab 3", "description": "Time, Day, Month, Date in English", "video": "english_3"}
+      ],
+      "quizzes": [
+        {
+          "title": "Kuis 1",
+          "description": "Greeting, Thank You, and Sorry",
+          "questions": [
+            {
+              "question": "What is the most appropriate greeting to use when you meet your teacher in the morning?",
+              "options": ["Good night", "Good afternoon", "Good morning", "Goodbye"],
+              "answer": "Good morning"
+            },
+            {
+              "question": "Your friend helps you carry your books. What should you say to show your gratitude?",
+              "options": ["I'm sorry", "Thank you", "Excuse me", "Hello"],
+              "answer": "Thank you"
+            },
+            {
+              "question": "You accidentally step on someone's foot. What should you say?",
+              "options": ["You're Welcome", "Congratulations", "I'm sorry", "Goodluck"],
+              "answer": "I'm sorry"
+            },
+            {
+              "question": "Someone says \"Thank you\" to you. What is an appropriate response?",
+              "options": ["I'm sorry", "Goodbye", "You're welcome", "Hello"],
+              "answer": "You're welcome"
+            },
+            {
+              "question": "Which situation is most appropriate to use the word \"sorry\"?",
+              "options": ["When you receive a gift", "When you want to ask someone to repeat what they said", "When you meet someone for the first time", "When you are saying goodbye"],
+              "answer": "When you want to ask someone to repeat what they said"
+            },
+            {
+              "question": "What is the proper way to greet someone at night before they sleep?",
+              "options": ["Good morning", "Good afternoon", "Good night", "Good day"],
+              "answer": "Good night"
+            },
+            {
+              "question": "Which of the following is a formal way to greet someone?",
+              "options": ["Hey!", "What's up?", "Good morning, Sir.", "Yo!"],
+              "answer": "Good morning, Sir."
+            },
+            {
+              "question": "If you want to enter a room and interrupt someone, you should say ...",
+              "options": ["Goodbye", "Excuse me", "See you", "Thanks"],
+              "answer": "Excuse me"
+            },
+            {
+              "question": "What should you say when someone says 'I'm sorry' to you?",
+              "options": ["Never mind", "You're welcome", "No problem", "Nice to meet you"],
+              "answer": "No problem"
+            },
+            {
+              "question": "Which of the following expressions is NOT a greeting?",
+              "options": ["Hello", "Hi", "How are you?", "Thank you"],
+              "answer": "Thank you"
+            }
+          ]
+        },
+        {
+          "title": "Kuis 2",
+          "description": "Identities, Hobbies, Family Members",
+          "questions": [
+            {
+              "question": "What is usually included in someone's identity?",
+              "options": ["Their favorite color", "Their name, age, and nationality", "Their shoe size", "Their lucky number"],
+              "answer": "Their name, age, and nationality"
+            },
+            {
+              "question": "Which of the following is an example of a hobby?",
+              "options": ["Going to school", "Eating dinner", "Playing the guitar", "Sleeping"],
+              "answer": "Playing the guitar"
+            },
+            {
+              "question": "Who is the son of your aunt or uncle?",
+              "options": ["Your cousin", "Your nephew", "Your brother", "Your grandfather"],
+              "answer": "Your cousin"
+            },
+            {
+              "question": "Which sentence best describes a hobby?",
+              "options": ["It's something you have to do every day.", "It's something you enjoy doing in your free time.", "It's something you get paid to do.", "It's something you do because you are forced to."],
+              "answer": "It's something you enjoy doing in your free time."
+            },
+            {
+              "question": "Your mother's father is your ...",
+              "options": ["Uncle", "Grandfather", "Brother", "Cousin"],
+              "answer": "Grandfather"
+            },
+            {
+              "question": "What do we call a person who likes to read books in their free time?",
+              "options": ["A chef", "A reader", "A runner", "A dancer"],
+              "answer": "A reader"
+            },
+            {
+              "question": "Your father's daughter is your ...",
+              "options": ["Sister", "Cousin", "Aunt", "Niece"],
+              "answer": "Sister"
+            },
+            {
+              "question": "Which sentence is correct to describe someone’s identity?",
+              "options": ["My name is John. I am 13 years old.", "I love pizza and movies.", "I sleep at 10 p.m.", "I can play the drum."],
+              "answer": "My name is John. I am 13 years old."
+            },
+            {
+              "question": "A person who likes painting as a hobby is usually called a ...",
+              "options": ["Writer", "Musician", "Painter", "Singer"],
+              "answer": "Painter"
+            },
+            {
+              "question": "Your uncle's wife is your ...",
+              "options": ["Mother", "Grandmother", "Aunt", "Sister"],
+              "answer": "Aunt"}
+          ]
+        }
+
+      ]
+    }
+  ]
+}

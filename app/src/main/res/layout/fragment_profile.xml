@@ -93,7 +93,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/baseline_circle_notifications_24"/>
-        
+
         <TextView
             android:id="@+id/tv_notification"
             android:layout_width="wrap_content"

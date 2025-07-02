@@ -16,12 +16,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.edufun.adapter.QuizDetailAdapter
-import com.example.edufun.database.AppDatabase
+import com.example.edufun.database.EdufunDatabaseHelper
 import com.example.edufun.databinding.ActivityQuizDetailBinding
 import com.example.edufun.model.History
 import com.example.edufun.view.history.HistoryFragment
 import com.example.edufun.view.main.MainActivity
 import com.example.edufun.viewmodel.QuizViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -64,12 +65,17 @@ class QuizDetailActivity : AppCompatActivity() {
         binding.btnSubmit.setOnClickListener {
             val score = correctAnswer * 20
             val title =  binding.tvQuizDescription.text
+            val quizId = intent.getIntExtra("quiz_id", -1)
 
             if (score != null) {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 Toast.makeText(this, "Cek skor kamu di riwayat", Toast.LENGTH_SHORT).show()
-                saveQuizToDatabase(title.toString(), score.toString())
+                quizViewModel.saveQuizToDatabase(
+                    title.toString(),
+                    score.toString(),
+                    quizId
+                )
             } else {
                 finish()
             }
@@ -83,7 +89,8 @@ class QuizDetailActivity : AppCompatActivity() {
         binding.btnSubmit.visibility = View.GONE
 
         Handler(Looper.getMainLooper()).postDelayed({
-            quizViewModel.getQuizzesByQuizId(quizId).observe(this, Observer { quizzes ->
+            // Ganti pemanggilan ke fungsi random
+            quizViewModel.getRandomQuizzesByQuizId(quizId).observe(this) { quizzes ->
                 binding.progressBar.visibility = View.GONE
 
                 if (quizzes.isEmpty()) {
@@ -91,8 +98,8 @@ class QuizDetailActivity : AppCompatActivity() {
                     binding.btnSubmit.visibility = View.GONE
                     binding.tvNoQuizzes.visibility = View.VISIBLE
                 } else {
-                    quizDetailAdapter = QuizDetailAdapter(quizzes, this) { quiz, s ->
-                        if (s == quiz.answer) {
+                    quizDetailAdapter = QuizDetailAdapter(quizzes, this) { quiz, selectedOption ->
+                        if (selectedOption == quiz.answer) {
                             correctAnswer++
                         } else {
                             inCorrectAnswer++
@@ -105,9 +112,8 @@ class QuizDetailActivity : AppCompatActivity() {
                     binding.btnSubmit.visibility = View.VISIBLE
                     binding.tvNoQuizzes.visibility = View.GONE
                 }
-            })
+            }
         }, 1000)
-
     }
 
     private fun setupView() {
@@ -134,25 +140,5 @@ class QuizDetailActivity : AppCompatActivity() {
         setResult(RESULT_OK, intent)
         startActivity(intent)
         finish()
-    }
-
-    private fun saveQuizToDatabase(title: String, score: String) {
-        if (score.isNotEmpty()) {
-            val quiz = History(title = title, score = score)
-            GlobalScope.launch(Dispatchers.IO) {
-                val database = AppDatabase.getDatabase(applicationContext)
-                try {
-                    database.quizHistoryDao().insertQuiz(quiz)
-                    Log.d(TAG, "Prediction saved successfully: $quiz")
-                    val quizzes = database.quizHistoryDao().getAllQuiz()
-                    Log.d(TAG, "All quizzes after save: $quizzes")
-                    moveToHistory(title, score)
-                } catch (e: Exception) {
-                    Log.e(TAG, "Failed to save quiz: $quiz", e)
-                }
-            }
-        } else {
-            Log.e(TAG, "Score is empty, cannot save quiz to database.")
-        }
     }
 }

@@ -35,17 +35,24 @@ class QuizDetailAdapter(
         val quiz = quizList?.get(position) ?: return
 
         holder.tvQuestion.text = quiz.question
-        holder.rbOption1.text = quiz.option1
-        holder.rbOption2.text = quiz.option2
-        holder.rbOption3.text = quiz.option3
-        holder.rbOption4.text = quiz.option4
+
+        // Split options by delimiter
+        val options = quiz.options.split("|").map { it.trim() }
+
+        // Assign options to radio buttons
+        holder.rbOption1.text = options.getOrNull(0) ?: ""
+        holder.rbOption2.text = options.getOrNull(1) ?: ""
+        holder.rbOption3.text = options.getOrNull(2) ?: ""
+        holder.rbOption4.text = options.getOrNull(3) ?: ""
+
+        holder.radioGroup.setOnCheckedChangeListener(null) // prevent triggering when recycled
 
         holder.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             val selectedOption = when (checkedId) {
-                holder.rbOption1.id -> quiz.option1
-                holder.rbOption2.id -> quiz.option2
-                holder.rbOption3.id -> quiz.option3
-                holder.rbOption4.id -> quiz.option4
+                holder.rbOption1.id -> holder.rbOption1.text.toString()
+                holder.rbOption2.id -> holder.rbOption2.text.toString()
+                holder.rbOption3.id -> holder.rbOption3.text.toString()
+                holder.rbOption4.id -> holder.rbOption4.text.toString()
                 else -> ""
             }
             onAnswerSelected(quiz, selectedOption)

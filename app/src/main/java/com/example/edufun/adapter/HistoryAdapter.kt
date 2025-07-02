@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.edufun.R
 import com.example.edufun.model.History
 
-class HistoryAdapter(private val quizList: List<History>) :
+class HistoryAdapter(private var quizList: MutableList<History>) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     private var onDeleteClickListener: OnDeleteClickListener? = null
@@ -24,6 +24,12 @@ class HistoryAdapter(private val quizList: List<History>) :
         onDeleteClickListener = listener
     }
 
+    fun updateData(newList: List<History>) {
+        quizList.clear()
+        quizList.addAll(newList)
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_quiz_history_item, parent, false)
         return ViewHolder(view)
@@ -34,7 +40,7 @@ class HistoryAdapter(private val quizList: List<History>) :
         if (currentItem.score.isNotEmpty()) {
             holder.bind(currentItem)
             holder.itemView.visibility = View.VISIBLE
-            holder.itemView.layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT) // Atur kembali parameter tata letak
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         } else {
             holder.itemView.visibility = View.GONE
             holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)

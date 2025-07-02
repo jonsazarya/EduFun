@@ -9,14 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.edufun.adapter.QuizAdapter
-import com.example.edufun.database.QuizDatabaseHelper
+import com.example.edufun.database.EdufunDatabaseHelper
 import com.example.edufun.databinding.FragmentQuizBinding
 import com.example.edufun.model.Quiz
 
 class QuizFragment : Fragment(), QuizAdapter.OnQuizClickListener {
 
     private lateinit var binding: FragmentQuizBinding
-    private lateinit var quizDatabaseHelper: QuizDatabaseHelper
+    private lateinit var edufunDatabaseHelper: EdufunDatabaseHelper
     private lateinit var quizAdapter: QuizAdapter
 
     override fun onCreateView(
@@ -30,7 +30,7 @@ class QuizFragment : Fragment(), QuizAdapter.OnQuizClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        quizDatabaseHelper = QuizDatabaseHelper(requireContext())
+        edufunDatabaseHelper = EdufunDatabaseHelper(requireContext())
 
         val categoryId = arguments?.getInt("category_id", 0) ?: 0
         Log.d("QuizFragment", "Category ID received: $categoryId")
@@ -40,7 +40,7 @@ class QuizFragment : Fragment(), QuizAdapter.OnQuizClickListener {
 
     private fun setupRecyclerView(categoryId: Int) {
         try {
-            val quizzes = quizDatabaseHelper.getAllQuizzesByCategoryId(categoryId)
+            val quizzes = edufunDatabaseHelper.getAllQuizzesByCategoryId(categoryId)
             Log.d("QuizFragment", "Quizzes retrieved: ${quizzes.size}")
 
             quizAdapter = QuizAdapter(quizzes, this)

@@ -5,18 +5,20 @@ import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.MediaController
-import android.widget.VideoView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.media3.common.MediaItem
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.PlayerView
 import com.example.edufun.R
-import com.example.edufun.database.ChapterDatabaseHelper
+import com.example.edufun.database.EdufunDatabaseHelper
 import com.example.edufun.databinding.ActivityChapterDetailBinding
 
 class ChapterDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityChapterDetailBinding
-    private lateinit var chapterDatabaseHelper: ChapterDatabaseHelper
+    private lateinit var edufunDatabaseHelper: EdufunDatabaseHelper
+    private var player: ExoPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,39 +27,30 @@ class ChapterDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.backButton.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
 
-        chapterDatabaseHelper = ChapterDatabaseHelper(this)
+        edufunDatabaseHelper = EdufunDatabaseHelper(this)
 
         val chapterTitle = intent.getStringExtra("chapter_title") ?: "Bab pelajaran"
         val chapterDesc = intent.getStringExtra("chapter_desc") ?: "Deskripsi Bab"
         val videoName = intent.getStringExtra("video_name") ?: ""
-
-        binding.tvChapterTitle.text = chapterTitle
-        binding.tvChapterDesc.text = chapterDesc
 
         setupVideo(videoName)
         setupView()
     }
 
     private fun setupVideo(videoName: String) {
-        val videoView: VideoView = binding.vwChapter // Pastikan ID ini sesuai dengan layout XML Anda
-        val mediaController = MediaController(this)
-        mediaController.setAnchorView(videoView)
-        videoView.setMediaController(mediaController)
+        val playerView: PlayerView = binding.playerView
 
-        // Mengatur URI video dari folder raw
-        val videoUri: Uri = Uri.parse("android.resource://${packageName}/raw/$videoName")
-        videoView.setVideoURI(videoUri)
+        val videoUri: Uri = Uri.parse("android.resource://$packageName/raw/$videoName")
 
-        // Memulai pemutaran video
-        videoView.start()
-
-        // Menangani kesalahan saat memutar video
-        videoView.setOnErrorListener { mp, what, extra ->
-            // Tampilkan pesan kesalahan atau lakukan penanganan kesalahan di sini
-            true // Mengembalikan true jika kesalahan ditangani
+        player = ExoPlayer.Builder(this).build().also { exoPlayer ->
+            playerView.player = exoPlayer
+            val mediaItem = MediaItem.fromUri(videoUri)
+            exoPlayer.setMediaItem(mediaItem)
+            exoPlayer.prepare()
+            exoPlayer.playWhenReady = true
         }
     }
 
@@ -74,7 +67,18 @@ class ChapterDetailActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
+    override fun onStop() {
+        super.onStop()
+        releasePlayer()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        releasePlayer()
+    }
+
+    private fun releasePlayer() {
+        player?.release()
+        player = null
     }
 }
