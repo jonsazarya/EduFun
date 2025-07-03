@@ -21,6 +21,7 @@ import androidx.lifecycle.Observer
 import com.example.edufun.R
 import com.example.edufun.view.main.MainViewModel
 import com.example.edufun.model.User
+import com.example.edufun.notification.NotificationReceiver
 import java.util.Calendar
 
 class ProfileFragment : Fragment() {
@@ -47,6 +48,7 @@ class ProfileFragment : Fragment() {
 
         logoutButton.setOnClickListener {
             mainViewModel.logout()
+            showNotification("Logout", "Kamu berhasil keluar dari EduFun.")
             Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show()
         }
 
@@ -54,8 +56,6 @@ class ProfileFragment : Fragment() {
         calendarItem.setOnClickListener {
             showCalendar()
         }
-
-
 
         val shareItem = view.findViewById<ConstraintLayout>(R.id.share_item)
         shareItem.setOnClickListener {
@@ -73,6 +73,8 @@ class ProfileFragment : Fragment() {
             startActivity(settingsIntent)
         }
 
+        createNotificationChannel()
+        scheduleDailyReminder()
         return view
     }
 
@@ -93,10 +95,68 @@ class ProfileFragment : Fragment() {
                     "Tanggal dipilih: $selectedDay/${selectedMonth + 1}/$selectedYear",
                     Toast.LENGTH_SHORT
                 ).show()
+                showNotification("Pengingat", "Kamu memilih tanggal $selectedDay/${selectedMonth + 1}/$selectedYear")
             }, year, month, day)
-
         datePickerDialog.show()
     }
+
+    private fun showNotification(title: String, message: String) {
+        val notificationManager =
+            requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        val notificationBuilder = NotificationCompat.Builder(requireContext(), "edufun_channel")
+            .setSmallIcon(R.drawable.baseline_notifications_24) // pastikan ikon ini ada di drawable
+            .setContentTitle(title)
+            .setContentText(message)
+            .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
+    }
+
+    private fun createNotificationChannel() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val name = "EduFun Channel"
+            val descriptionText = "Channel untuk notifikasi EduFun"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = android.app.NotificationChannel("edufun_channel", name, importance).apply {
+                description = descriptionText
+            }
+
+            val notificationManager: NotificationManager =
+                requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun scheduleDailyReminder() {
+        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as android.app.AlarmManager
+        val intent = Intent(requireContext(), NotificationReceiver::class.java)
+        val pendingIntent = android.app.PendingIntent.getBroadcast(
+            requireContext(), 0, intent,
+            android.app.PendingIntent.FLAG_UPDATE_CURRENT or android.app.PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val calendar = java.util.Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(java.util.Calendar.HOUR_OF_DAY, 10)
+            set(java.util.Calendar.MINUTE, 0)
+            set(java.util.Calendar.SECOND, 0)
+        }
+
+        // Jika waktu sekarang sudah lewat 10 pagi, setel untuk besok
+        if (calendar.timeInMillis < System.currentTimeMillis()) {
+            calendar.add(java.util.Calendar.DAY_OF_YEAR, 1)
+        }
+
+        alarmManager.setRepeating(
+            android.app.AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            android.app.AlarmManager.INTERVAL_DAY,
+            pendingIntent
+        )
+    }
+
 
     companion object {
         private const val NOTIFICATION_ID = 1

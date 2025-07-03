@@ -46,6 +46,7 @@
             android:exported="true">
 
         </activity>
+        <receiver android:name=".notification.NotificationReceiver" />
     </application>
 
 </manifest>
